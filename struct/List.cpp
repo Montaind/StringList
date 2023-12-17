@@ -2,7 +2,18 @@
 
 List::List() : head(nullptr), tail(nullptr), count(0) {}
 
-List::~List() {}
+List::List(Node* head, Node* tail)
+{
+}
+
+List::~List() {
+	current = head;
+	while(current)
+	{
+		next();
+		delete prev;
+	}
+}
 
 void List::add(std::string string){
 	if (!head && !tail) {
@@ -16,6 +27,16 @@ void List::add(std::string string){
 		tail = node;
 	}
 	count++;
+}
+
+void List::coutEl()
+{
+	current = head;
+	for (int i = 0; i < count; i++) {
+		std::cout << current->string << "\n";
+		current = current->next;
+	}
+	
 }
 
 std::string List::get(int postition)
@@ -49,21 +70,19 @@ void List::del(int position)
 
 void List::del(std::string string)
 {
-	Node* node = getNode(string);
-	if (node == head) {
-		head = node->next;
-		delete node;
+	current = getNode(string);
+	if (current == head) {
+		head = current->next;
+		delete current;
 	}
-	else if (node == tail) {
-		Node* prev = getNode(count - 1);
+	else if (current == tail) {
 		delete tail;
 		tail = prev;
 		tail->next = nullptr;
 	}
 	else {
-		Node* prev = getNode(position - 1);
-		prev->next = node->next;
-		delete node;
+		prev->next = current->next;
+		delete current;
 	}
 	count--;
 }
@@ -95,4 +114,10 @@ Node* List::getNode(std::string string)
 		node = node->next;
 	}
 	return nullptr;
+}
+
+void List::next()
+{
+	prev = current;
+	current = current->next;
 }
