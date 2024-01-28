@@ -5,9 +5,9 @@ using namespace std;
 
 
 int main() {
-	List list;
+	List<std::string> list;
 	list.add("Adolf Hitler");
 	list.add("Tipo Bogdan");
 	list.add("Goga Boba");
-	list.coutEl();
+	std::cout << list.getData(0);
 }
