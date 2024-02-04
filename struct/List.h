@@ -1,15 +1,11 @@
 #pragma once
 #include <iostream>
-#include "Node.h"
 template <typename T>
 class List {
 public:
 	List() {
 		head = nullptr;
 		tail = nullptr;
-	}
-	List(Node* head, Node* tail) {
-	
 	}
 	~List() {
 		current = head;
@@ -59,6 +55,7 @@ public:
 		count--;
 	}
 	void del(int position) {
+		if (!head) return;
 		Node* node = getNode(position);
 		if (node == head) {
 			head = node->next;
